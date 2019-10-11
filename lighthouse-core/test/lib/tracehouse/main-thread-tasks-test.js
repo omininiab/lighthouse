@@ -433,15 +433,15 @@ describe('Main Thread Tasks', () => {
   it('should handle nested tasks of the same name', () => {
     /*
     An artistic rendering of the below trace:
-      ████████████████TaskA██████████████████
-          ███████████TaskA████████████
+      ████████████████SameName██████████████████
+          ███████████SameName████████████
     */
     const traceEvents = [
       ...boilerplateTrace,
-      {ph: 'B', name: 'TaskA', pid, tid, ts: baseTs, args},
-      {ph: 'B', name: 'TaskA', pid, tid, ts: baseTs + 25e3, args},
-      {ph: 'E', name: 'TaskA', pid, tid, ts: baseTs + 75e3, args},
-      {ph: 'E', name: 'TaskA', pid, tid, ts: baseTs + 100e3, args},
+      {ph: 'B', name: 'SameName', pid, tid, ts: baseTs, args},
+      {ph: 'B', name: 'SameName', pid, tid, ts: baseTs + 25e3, args},
+      {ph: 'E', name: 'SameName', pid, tid, ts: baseTs + 75e3, args},
+      {ph: 'E', name: 'SameName', pid, tid, ts: baseTs + 100e3, args},
     ];
 
     traceEvents.forEach(evt => Object.assign(evt, {cat: 'devtools.timeline'}));
@@ -453,7 +453,7 @@ describe('Main Thread Tasks', () => {
         attributableURLs: [],
 
         children: [tasks[1]],
-        event: traceEvents.find(event => event.name === 'TaskA' && event.ts === baseTs),
+        event: traceEvents.find(event => event.name === 'SameName' && event.ts === baseTs),
         startTime: 0,
         endTime: 100,
         duration: 100,
