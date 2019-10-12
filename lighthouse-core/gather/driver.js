@@ -1268,7 +1268,7 @@ class Driver {
    * Returns the flattened list of all DOM elements within the document.
    * @param {boolean=} pierce Whether to pierce through shadow trees and iframes.
    *     True by default.
-   * @return {Promise<Array<Element>>} The found elements, or [], resolved in a promise
+   * @return {Promise<Array<LHElement>>} The found elements, or [], resolved in a promise
    */
   getElementsInDocument(pierce = true) {
     return this.getNodesInDocument(pierce)
